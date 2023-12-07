@@ -1,0 +1,35 @@
+service: rs-cart-api
+
+plugins:
+  - serverless-offline
+  - serverless-dotenv-plugin
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  stage: dev
+  region: eu-west-1
+  environment:
+    # DB_HOST: qwerty123.cm1bvsrqmppo.eu-west-1.rds.amazonaws.com
+    # DB_PORT: 5432
+    # DB_NAME: qwerty123
+    # DB_USERNAME: qwerty123
+    # DB_PASSWORD: qwerty123
+    # PRODUCT_API: ${env:PRODUCT_API}
+
+functions:
+  main:
+    handler: dist/main.handler
+    events:
+      - http:
+          method: GET
+          path: /
+      - http:
+          method: GET
+          path: /ping
+      - http:
+          method: POST
+          path: 'api/auth/login'
+      - http:
+          method: GET
+          path: 'api/profile'
